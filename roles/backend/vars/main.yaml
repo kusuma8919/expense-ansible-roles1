@@ -1,0 +1,4 @@
+MYSQL_HOST: db.sushmadev.online
+sql_password: ExpenseApp@1
+APP_LOCATION: /app
+component: backend

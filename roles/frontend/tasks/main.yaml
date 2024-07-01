@@ -1,0 +1,28 @@
+  - name: install nginx server
+    ansible.builtin.dnf:
+      name: nginx
+      state: present
+
+  - name: enable  nginx
+    ansible.builtin.service:
+      name: nginx
+      enabled: yes
+      state: started
+
+  - name: Remove html
+    ansible.builtin.command:  rm -rf {{APP_LOCATION}}/*
+
+  - name: run and pre-requisistes
+    ansible.builtin.import_role:
+      name: common
+      tasks_from: app-set
+
+  - name: copy backend conf
+    ansible.builtin.template:
+      src: expense.conf.j2
+      dest: /etc/nginx/default.d/expense.conf
+    notify:
+    - restart nginx
+  
+
+  
